@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import forge.game.player.PlayerCollection;
 import forge.game.ability.AbilityKey;
 import forge.game.trigger.TriggerType;
 import org.apache.commons.lang3.StringUtils;
@@ -241,6 +242,10 @@ public class CostAdjustment {
         }
 
         if (sa.isSpell()) {
+            if (sa.getHostCard().hasKeyword(Keyword.ASSIST)) {
+                adjustCostByAssist(cost, sa, test);
+            }
+
             if (sa.getHostCard().hasKeyword(Keyword.DELVE)) {
                 sa.getHostCard().clearDelved();
 
@@ -279,6 +284,31 @@ public class CostAdjustment {
         }
     }
     // GetSpellCostChange
+
+    private static void adjustCostByAssist(ManaCostBeingPaid cost, final SpellAbility sa, boolean test) {
+        // 702.132. Assist
+        // 702.132a Assist is a static ability that modifies the rules of paying for the spell with assist (see rules 601.2g-h).
+        // If the total cost to cast a spell with assist includes a generic mana component, before you activate mana abilities while casting it, you may choose another player.
+        // That player has a chance to activate mana abilities. Once that player chooses not to activate any more mana abilities, you have a chance to activate mana abilities.
+        // Before you begin to pay the total cost of the spell, the player you chose may pay for any amount of the generic mana in the spell’s total cost.
+        int genericLeft = cost.getUnpaidShards(ManaCostShard.GENERIC);
+        if (genericLeft == 0) {
+            return;
+        }
+
+        Player activator = sa.getActivatingPlayer();
+        PlayerCollection otherPlayers = activator.getAllOtherPlayers();
+
+        Player assistant = activator.getController().choosePlayerToAssistPayment(otherPlayers, sa, "Choose a player to assist paying this spell", genericLeft);
+        if (assistant == null) {
+            return;
+        }
+        int requestedAmount = genericLeft;
+        // TODO: Nice to have. Ask the player how much mana you are hoping someone will pay.
+        assistant.getController().helpPayForAssistSpell(cost, sa, genericLeft, requestedAmount);
+
+
+    }
 
     private static void adjustCostByConvokeOrImprovise(ManaCostBeingPaid cost, final SpellAbility sa, boolean improvise, boolean test) {
         sa.clearTappedForConvoke();
