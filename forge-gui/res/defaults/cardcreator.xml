@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<layout>
+	<!-- Card Creator uses a single full-screen panel with internal MigLayout -->
+	<cell x="0.0" y="0.0" w="1.0" h="1.0">
+		<doc>CARD_CREATOR</doc>
+	</cell>
+</layout>

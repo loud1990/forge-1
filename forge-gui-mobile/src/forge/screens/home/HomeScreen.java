@@ -111,6 +111,11 @@ public class HomeScreen extends FScreen {
             Forge.lastButtonIndex = activeButtonIndex;
             SettingsScreen.show(true);
         });
+        addButton("Card Creator", e -> {
+            activeButtonIndex = 6;
+            Forge.lastButtonIndex = activeButtonIndex;
+            forge.screens.cardcreation.CardCreationScreen.show(true);
+        });
         addButton(Forge.getLocalizer().getMessage("lblHelp"), e -> FThreads.invokeInEdtLater(() -> {
             try {
                 if (Forge.getDeviceAdapter().isConnectedToInternet()) {

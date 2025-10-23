@@ -8,6 +8,8 @@ import forge.localinstance.properties.ForgeConstants;
 import forge.localinstance.skin.FSkinProp;
 import forge.screens.bazaar.CBazaarUI;
 import forge.screens.bazaar.VBazaarUI;
+import forge.screens.cardcreation.CCardCreationUI;
+import forge.screens.cardcreation.VCardCreationUI;
 import forge.screens.deckeditor.CDeckEditorUI;
 import forge.screens.deckeditor.VDeckEditorUI;
 import forge.screens.home.CHomeUI;
@@ -43,6 +45,15 @@ public class FScreen {
             false,
             "lblBacktoHome",
             ForgeConstants.WORKSHOP_LAYOUT_FILE,
+            false);
+    public static final FScreen CARD_CREATOR = new FScreen(
+            VCardCreationUI.SINGLETON_INSTANCE,
+            CCardCreationUI.SINGLETON_INSTANCE,
+            "lblCardCreator",
+            FSkin.getIcon(FSkinProp.ICO_EDIT),
+            false,
+            "lblBacktoHome",
+            ForgeConstants.CARD_CREATOR_LAYOUT_FILE,
             false);
     public static final FScreen DECK_EDITOR_CONSTRUCTED = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
