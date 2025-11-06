@@ -204,7 +204,7 @@ public enum VCardCreatorUI implements IVTopLevelUI {
         txtToughness.setText("");
         txtLoyalty.setText("");
         txtCustomScript.setText("");
-        lblImagePreview.setIcon(null);
+        lblImagePreview.setIcon((javax.swing.Icon) null);
         selectedImageFile = null;
         updateConditionalFields();
     }
@@ -217,7 +217,7 @@ public enum VCardCreatorUI implements IVTopLevelUI {
     @Override
     public void populate() {
         FPanel pnl = forge.view.FView.SINGLETON_INSTANCE.getPnlInsets();
-        pnl.setBorder(null);
+        pnl.setBorder((javax.swing.border.Border) null);
         pnl.setLayout(new MigLayout("insets 0, gap 0, wrap"));
         pnl.add(lblTitle, "w 100%, h 40px!");
         pnl.add(scrMain, "w 100%, h 100%-40px!");
