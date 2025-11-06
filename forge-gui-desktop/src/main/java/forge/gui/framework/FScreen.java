@@ -16,6 +16,8 @@ import forge.screens.match.CMatchUI;
 import forge.screens.match.VMatchUI;
 import forge.screens.workshop.CWorkshopUI;
 import forge.screens.workshop.VWorkshopUI;
+import forge.screens.cardcreator.CCardCreatorUI;
+import forge.screens.cardcreator.VCardCreatorUI;
 import forge.toolbox.FOptionPane;
 import forge.toolbox.FSkin;
 import forge.toolbox.FSkin.SkinImage;
@@ -43,6 +45,15 @@ public class FScreen {
             false,
             "lblBacktoHome",
             ForgeConstants.WORKSHOP_LAYOUT_FILE,
+            false);
+    public static final FScreen CARD_CREATOR_SCREEN = new FScreen(
+            VCardCreatorUI.SINGLETON_INSTANCE,
+            CCardCreatorUI.SINGLETON_INSTANCE,
+            "lblCardCreator",
+            FSkin.getIcon(FSkinProp.ICO_SETTINGS),
+            false,
+            "lblBacktoHome",
+            ForgeConstants.CARD_CREATOR_LAYOUT_FILE,
             false);
     public static final FScreen DECK_EDITOR_CONSTRUCTED = new FScreen(
             VDeckEditorUI.SINGLETON_INSTANCE,
