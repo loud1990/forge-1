@@ -30,7 +30,6 @@ import forge.screens.home.settings.VSubmenuReleaseNotes;
 import forge.screens.workshop.views.VCardDesigner;
 import forge.screens.workshop.views.VCardScript;
 import forge.screens.workshop.views.VWorkshopCatalog;
-import forge.screens.cardcreator.VCardCreatorUI;
 
 /**
  * These are the identifiers for tabs found in the drag layout.
@@ -58,8 +57,6 @@ public enum EDocID {
     WORKSHOP_CATALOG (VWorkshopCatalog.SINGLETON_INSTANCE),
     WORKSHOP_CARDDESIGNER (VCardDesigner.SINGLETON_INSTANCE),
     WORKSHOP_CARDSCRIPT (VCardScript.SINGLETON_INSTANCE),
-
-    CARD_CREATOR (VCardCreatorUI.SINGLETON_INSTANCE),
 
     HOME_QUESTSTART (VSubmenuQuestStart.SINGLETON_INSTANCE),
     HOME_QUESTLOADDATA(VSubmenuQuestLoadData.SINGLETON_INSTANCE),

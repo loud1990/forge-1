@@ -22,6 +22,7 @@ import forge.card.CardDb;
 import forge.gui.framework.ICDoc;
 import forge.item.PaperCard;
 
+import java.io.File;
 import java.util.regex.Pattern;
 
 /**

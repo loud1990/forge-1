@@ -1,11 +1,8 @@
 package forge.screens.cardcreator;
 
 import forge.Singletons;
-import forge.gui.framework.DragCell;
-import forge.gui.framework.DragTab;
-import forge.gui.framework.EDocID;
 import forge.gui.framework.FScreen;
-import forge.gui.framework.IVDoc;
+import forge.gui.framework.IVTopLevelUI;
 import forge.toolbox.*;
 import net.miginfocom.swing.MigLayout;
 
@@ -15,17 +12,15 @@ import java.awt.event.ItemEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import javax.swing.Icon;
 
 /**
  * Card Creator main view - provides UI for creating custom cards.
  *
  * <br><i>(V at beginning of class name denotes a view class.)</i>
  */
-public enum VCardCreatorUI implements IVDoc<CCardCreatorUI> {
+public enum VCardCreatorUI implements IVTopLevelUI {
     SINGLETON_INSTANCE;
-
-    private DragCell parentCell;
-    private final DragTab tab = new DragTab("Card Creator");
 
     // Title
     private final FLabel lblTitle = new FLabel.Builder()
@@ -165,10 +160,8 @@ public enum VCardCreatorUI implements IVDoc<CCardCreatorUI> {
         lblAdvancedHeader.setText((advancedExpanded ? "▼" : "▶") + " Advanced: Custom Abilities (Optional)");
         pnlWarning.setVisible(advancedExpanded);
         scrCustomScript.setVisible(advancedExpanded);
-        if (parentCell != null) {
-            parentCell.getBody().revalidate();
-            parentCell.getBody().repaint();
-        }
+        pnlMain.revalidate();
+        pnlMain.repaint();
     }
 
     private void chooseImage() {
@@ -189,7 +182,7 @@ public enum VCardCreatorUI implements IVDoc<CCardCreatorUI> {
             try {
                 ImageIcon icon = new ImageIcon(selectedImageFile.getAbsolutePath());
                 Image scaled = icon.getImage().getScaledInstance(223, 310, Image.SCALE_SMOOTH);
-                lblImagePreview.setIcon(new ImageIcon(scaled));
+                lblImagePreview.setIcon((Icon) new ImageIcon(scaled));
             } catch (Exception e) {
                 FOptionPane.showMessageDialog("Error loading image: " + e.getMessage(), "Error", FOptionPane.ERROR_ICON);
             }
@@ -217,11 +210,17 @@ public enum VCardCreatorUI implements IVDoc<CCardCreatorUI> {
     }
 
     @Override
+    public void instantiate() {
+        // Components are already initialized in constructor
+    }
+
+    @Override
     public void populate() {
-        JPanel body = parentCell.getBody();
-        body.setLayout(new MigLayout("insets 0, gap 0, wrap"));
-        body.add(lblTitle, "w 100%, h 40px!");
-        body.add(scrMain, "w 100%, h 100%-40px!");
+        FPanel pnl = forge.view.FView.SINGLETON_INSTANCE.getPnlInsets();
+        pnl.setBorder(null);
+        pnl.setLayout(new MigLayout("insets 0, gap 0, wrap"));
+        pnl.add(lblTitle, "w 100%, h 40px!");
+        pnl.add(scrMain, "w 100%, h 100%-40px!");
 
         // Populate form
         pnlMain.removeAll();
@@ -302,33 +301,19 @@ public enum VCardCreatorUI implements IVDoc<CCardCreatorUI> {
         pnlButtons.add(btnCancel);
         pnlMain.add(pnlButtons, "gaptop 20");
 
-        body.revalidate();
-        body.repaint();
+        pnl.revalidate();
+        pnl.repaint();
     }
 
     @Override
-    public EDocID getDocumentID() {
-        return EDocID.CARD_CREATOR;
+    public boolean onSwitching(FScreen fromScreen, FScreen toScreen) {
+        return true;
     }
 
     @Override
-    public DragTab getTabLabel() {
-        return tab;
-    }
-
-    @Override
-    public CCardCreatorUI getLayoutControl() {
-        return CCardCreatorUI.SINGLETON_INSTANCE;
-    }
-
-    @Override
-    public void setParentCell(DragCell cell) {
-        this.parentCell = cell;
-    }
-
-    @Override
-    public DragCell getParentCell() {
-        return parentCell;
+    public boolean onClosing(FScreen screen) {
+        Singletons.getControl().setCurrentScreen(FScreen.HOME_SCREEN);
+        return false;
     }
 
     // Getters for controller
