@@ -51,6 +51,8 @@
   - [Android Builds](Development/android-builds.md)
   - [Ownership](Development/ownership.md)
   - [Docker Container](docker-setup.md)
+  - [Automated Card Script Generation](Automated-Card-Script-Generation-Summary.md)
+    - [Full Implementation Plan](Automated-Card-Script-Generation-Plan.md)
 
 - [Customization and Themes.md](Themes.md)
   - Skins
