@@ -58,6 +58,7 @@
   - [Music](Custom-Music.md)
   - [Card Images](Card-Images.md)
   - [File Formats](File-Formats.md)
+  - [Card Creator GUI](Card-Creator-GUI.md)
   - [Creating your first custom set](Creating-a-custom-set.md)
 
 - [Missing Cards in Forge](Missing-Cards-in-Forge.md)
