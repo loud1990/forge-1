@@ -21,11 +21,7 @@ import forge.StaticData;
 import forge.card.CardDb;
 import forge.gui.framework.ICDoc;
 import forge.item.PaperCard;
-import forge.localinstance.properties.ForgeConstants;
 
-import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.regex.Pattern;
 
 /**
