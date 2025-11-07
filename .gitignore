@@ -94,3 +94,31 @@ forge-gui/tools/PerSetTrackingResults
 # Ignore python temporaries
 __pycache__
 *.pyc
+
+# Automated Card Script Generation - Isolation
+# These files should NEVER be in PRs to main Forge repo
+
+# Python automation environment
+forge-scripts/venv/
+forge-scripts/.venv/
+forge-scripts/**/__pycache__/
+
+# Data and cache directories
+forge-scripts/data/
+forge-scripts/logs/
+qdrant_storage/
+embeddings/
+*.npy
+*.pkl
+
+# Card images cache
+card_images_cache/
+forge-scripts/**/cache/
+
+# Ollama cache
+ollama_cache/
+*.gguf
+
+# Local configuration
+forge-scripts/config.local.py
+forge-scripts/.env
